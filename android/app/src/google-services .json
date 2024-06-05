@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "416606115008",
+    "project_id": "primeott-d8dd1",
+    "storage_bucket": "primeott-d8dd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416606115008:android:1893d2cc4335cd83bb0925",
+        "android_client_info": {
+          "package_name": "com.imam.ottprime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeX_FNhgjBzcyw_55vHRJ1IYj6-CtSmU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
