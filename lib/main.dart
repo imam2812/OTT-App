@@ -5,6 +5,7 @@ import 'package:ottprime/OTT/Prime%20Splash.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'OTT/Modeltheme.dart';
+import 'OTT/PRIME1.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -44,7 +44,9 @@ class _ott3State extends State<ott3> {
   ];
 
   int currentindex = 0;
+
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
     //  backgroundColor: Colors.black,

@@ -11,19 +11,19 @@ class ott1 extends StatefulWidget {
 }
 
 class _ott1State extends State<ott1> {
-
   TextEditingController imam5 = TextEditingController();
   TextEditingController imam4 = TextEditingController();
-
   final imam3 = GlobalKey<FormState>();
+  bool _isObscure = true; // Whether the password is currently obscured or not
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/2560px-Amazon_Prime_Video_logo.svg.png"),
+          child: Image.network(
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/2560px-Amazon_Prime_Video_logo.svg.png"),
         ),
         title: Center(child: Text("Login Page")),
         actions: [
@@ -33,14 +33,11 @@ class _ott1State extends State<ott1> {
           )
         ],
       ),
-
       body: Form(
         key: imam3,
         child: Column(
           children: [
-
             SizedBox(height: 10),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -49,20 +46,19 @@ class _ott1State extends State<ott1> {
                 child: TextFormField(
                   controller: imam4,
                   keyboardType: TextInputType.name,
-                  validator: (int){
-                    if(int==null   || int.isEmpty){
+                  validator: (int) {
+                    if (int == null || int.isEmpty) {
                       return "Enter Valid Name";
                     }
                   },
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.person),
-                    hintText: "Enter Your Name"
-                  ),
+                      border: OutlineInputBorder(),
+                      icon: Icon(Icons.person),
+                      hintText: "Enter Your Name"
+                   ),
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -70,66 +66,79 @@ class _ott1State extends State<ott1> {
                 width: 400,
                 child: TextFormField(
                   controller: imam5,
-                  validator: (input){
-                    if(input==null  ||  input.isEmpty || input.length!=8)
+                  obscureText: _isObscure, // Toggle password visibility
+                  validator: (input) {
+                    if (input == null ||
+                        input.isEmpty ||
+                        input.length != 8)
                       return "Enter Valid Password";
                   },
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       icon: Icon(Icons.keyboard),
-                      hintText: "Enter Your Password"
-                  ),
+                      hintText: "Enter Your Password",
+                      suffixIcon: IconButton(
+                        // Add IconButton for password visibility toggle
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                        icon: Icon(_isObscure
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                      )),
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(left: 130),
               child: Row(
                 children: [
-                  ElevatedButton(onPressed: ()async{
-                    final message = await AuthService().login(
-                        email: imam4.text,
-                        password: imam5.text);
+                  ElevatedButton(
+                      onPressed: () async {
+                        final message = await AuthService().login(
+                            email: imam4.text, password: imam5.text);
 
-                    if(imam3.currentState!.validate()){
-                      if (message!.contains("Success")){
+                        if (imam3.currentState!.validate()) {
+                          if (message!.contains("Success")) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => prime()),
+                            );
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Successfully Logged In")));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Email Does Not Exist")));
+                          }
+                        }
+                      },
+                      child: Text("Login")),
+                  SizedBox(
+                    width: 25,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => prime()),
+                          MaterialPageRoute(builder: (context) => ott7()),
                         );
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Successfully Logged In"))
-                        );
-                      }
-                      else { ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("Email Does Not Exist"))
-                      );
-                      }
-
-
-                    }
-                  }, child: Text("Login")),
-                  SizedBox(width: 25,),
-                  ElevatedButton(onPressed: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ott7()),
-                    );
-                  }, child: Text("Sign up")),
-
+                      },
+                      child: Text("Sign up")),
                 ],
               ),
             ),
-            
-            SizedBox(height: 10,),
-
+            SizedBox(
+              height: 10,
+            ),
             Center(
               child: Container(
                 height: 250,
                 width: 400,
-                child: Image.network("https://images.squarespace-cdn.com/content/v1/56feec9dcf80a1095e4b8d26/1563892196700-TPSQ15CHYXDCO80QQ9GL/towergif.gif"),
+                child: Image.network(
+                    "https://images.squarespace-cdn.com/content/v1/56feec9dcf80a1095e4b8d26/1563892196700-TPSQ15CHYXDCO80QQ9GL/towergif.gif"),
               ),
             )
           ],
